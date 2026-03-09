@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+
+:root {
+  /* Custom colors */
+  --color-pink-50: #fdf2f8;
+  --color-pink-100: #fce7f3;
+  --color-pink-300: #f472b6;
+  --color-pink-400: #ec4899;
+  
+  --color-rose-50: #fff5f7;
+  --color-rose-300: #f43f5e;
+  --color-rose-400: #f43f5e;
+  --color-rose-500: #e11d48;
+  
+  --color-teal-300: #67e8f9;
+  --color-teal-400: #22d3ee;
+  --color-teal-500: #06b6d4;
+  
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  
+  --color-green-50: #f0fdf4;
+  --color-green-500: #22c55e;
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+
+code {
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+@layer utilities{
+
+  @keyframes fadeIn {
+    0% { 
+      opacity: 0; 
+    }
+    100% { 
+      opacity: 1; 
+    }
+  }
+  
+  @keyframes waving {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(15deg); }
+    30% { transform: rotate(-10deg); }
+    45% { transform: rotate(15deg); }
+    60% { transform: rotate(-10deg); }
+    75% { transform: rotate(15deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  @keyframes fadeRightOut {
+    from {
+      opacity: 1;
+      transform: translate3d(0, 0,0);
+    }
+    to {
+      opacity: 0;
+      transform:  translate3d(-12%, 0,0);
+    }
+  }
+  @keyframes fadeLeftIn {
+    from {
+      opacity: 0;
+      transform: translate3d(-12%, 0,0);
+    }
+    to {
+      opacity: 1;
+      transform:  translate3d(0, 0,0);
+    }
+  }
+  @keyframes beating {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+  @keyframes shaking {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-3px, 0); }
+    50% { transform: translate(3px, 0); }
+    75% { transform: translate(-3px, 0); }
+    100% { transform: translate(0, 0); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 500ms ease-out forwards;
+  }
+  .animate-waving {
+    animation: waving 2s ease-in-out infinite;
+  }
+  .animate-beating {
+    animation: beating 1s ease-in-out infinite;
+  }
+
+  .animate-fadeRightOut {
+    animation: fadeRightOut 500ms forwards;
+  }
+  .animate-fadeLeftIn {
+    animation: fadeLeftIn 500ms forwards;
+  }
+  .transition-shaking {
+    animation: shaking 0.5s ease-in-out infinite;
+  }
+  .shake-on-hover:hover {
+    animation: shaking 0.2s infinite;
+  }
+  ::view-transition-old(.fadeRightOut){
+    animation: fadeRightOut 500ms forwards;
+  }
+  
+  ::view-transition-new(.fadeRightOut){
+    animation: fadeRightOut 500ms  reverse;
+  }
+
+}  

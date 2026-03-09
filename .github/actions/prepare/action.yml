@@ -1,0 +1,33 @@
+description: Prepares the repo for a typical CI job
+
+name: Prepare
+
+inputs:
+  packageManager:
+    description: 'Package manager to use (pnpm or bun)'
+    required: false
+    default: 'pnpm'
+
+runs:
+  steps:
+    - name: Install bun
+      if: inputs.packageManager == 'bun'
+      uses: oven-sh/setup-bun@v2
+      with:
+        bun-version: latest
+    - name: Install pnpm
+      if: inputs.packageManager == 'pnpm'
+      uses: pnpm/action-setup@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+    - name: Install dependencies with pnpm
+      if: inputs.packageManager == 'pnpm'
+      run: pnpm install
+      shell: bash
+    - name: Install dependencies with bun
+      if: inputs.packageManager == 'bun'
+      run: bun install
+      shell: bash
+  using: composite
