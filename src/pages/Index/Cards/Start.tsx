@@ -1,4 +1,5 @@
 import {memo} from 'react';
+
 import ButtonBeating from '@/components/Button';
 
 const Start = memo(({open, callback}:{open:boolean, callback:()=>void})=>{

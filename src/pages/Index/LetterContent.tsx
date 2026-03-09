@@ -1,13 +1,14 @@
-import { Dispatch } from 'react';
-import Greetings from '@/pages/Index/Cards/Greetings';
-import Start from '@/pages/Index/Cards/Start';
+import type { Dispatch } from 'react';
+
+import type { AnswerType } from '@/@types/card.types';
 import Asking from '@/pages/Index/Cards/Asking';
+import EmailFlow from '@/pages/Index/Cards/EmailFlow';
+import Grateful from '@/pages/Index/Cards/Grateful';
+import Greetings from '@/pages/Index/Cards/Greetings';
 import Preference from '@/pages/Index/Cards/Preference';
 import Regret from '@/pages/Index/Cards/Regret';
-import Grateful from '@/pages/Index/Cards/Grateful';
-import EmailFlow from '@/pages/Index/Cards/EmailFlow';
-import { InvitationState, InvitationAction } from '@/utils/reducer/invitationReducer';
-import { AnswerType } from '@/@types/card.types';
+import Start from '@/pages/Index/Cards/Start';
+import type { InvitationState, InvitationAction } from '@/utils/reducer/invitationReducer';
 
 interface Activity {
   id: number;

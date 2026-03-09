@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Preference from './Preference'
 import { describe, it, expect, vi } from 'vitest'
+
+import Preference from './Preference'
 
 describe('Preference card', () => {
   it('disables continue button when no activities selected', () => {

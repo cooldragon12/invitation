@@ -1,9 +1,12 @@
-import React, { FC, PropsWithChildren, useReducer, useTransition } from 'react'
-import LetterContent from './LetterContent';
-import { invitationReducer, initialState } from '@/utils/reducer/invitationReducer';
-import { AnswerType } from '@/@types/card.types';
+import type { FC, PropsWithChildren} from 'react';
+import { useReducer, useTransition } from 'react'
 
-const Letter:FC<PropsWithChildren> = ({children,...props})=>{
+import type { AnswerType } from '@/@types/card.types';
+import { invitationReducer, initialState } from '@/utils/reducer/invitationReducer';
+
+import LetterContent from './LetterContent';
+
+const Letter:FC<PropsWithChildren> = ()=>{
     const [isPending, startTransition] = useTransition();
     const [state, dispatch] = useReducer(invitationReducer, initialState);
 
@@ -37,7 +40,7 @@ const Letter:FC<PropsWithChildren> = ({children,...props})=>{
     };
 
     return (
-        <div className={` ${state.open? 'w-220 h-170':'w-200 h-140'} transition-all overflow-hidden delay-300 bg-white rounded-3xl flex justify-center relative`}>
+        <div className={` ${state.open || isPending? 'w-220 h-170':'w-200 h-140'} transition-all overflow-hidden delay-300 bg-white rounded-3xl flex justify-center relative`}>
             <LetterContent  
                 state={state}
                 dispatch={dispatch}

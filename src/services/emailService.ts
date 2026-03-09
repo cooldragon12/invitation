@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import emailjs from '@emailjs/browser';
 
 interface EmailPayload {
   to: string;
@@ -57,7 +58,7 @@ export async function generateEmailContent(
   }
 }
 
-import emailjs from '@emailjs/browser';
+
 
 export async function sendEmail(payload: EmailPayload): Promise<{ success: boolean; error?: string }> {
   const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;

@@ -1,5 +1,8 @@
-import { invitationReducer, initialState, InvitationState } from './invitationReducer'
 import { describe, it, expect } from 'vitest'
+
+import type { InvitationState } from './invitationReducer';
+import { invitationReducer, initialState } from './invitationReducer'
+
 
 describe('invitationReducer', () => {
   it('returns initial state when given unknown action', () => {

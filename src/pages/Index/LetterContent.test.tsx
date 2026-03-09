@@ -4,14 +4,21 @@ import { describe, it, expect, vi } from 'vitest'
 vi.mock('@/pages/Index/Cards/EmailFlow', () => {
   return {
     default: ({ answer, selectedActivities, activities }: any) => (
+      <>
       <div>Mocked EmailFlow</div>
+      <>{answer}</>
+      <>{JSON.stringify(selectedActivities)}</>
+      <>{JSON.stringify(activities)}</>
+      </>
     ),
   }
 })
 
 import { render, screen } from '@testing-library/react'
-import LetterContent from './LetterContent'
+
 import { initialState } from '@/utils/reducer/invitationReducer'
+
+import LetterContent from './LetterContent'
 
 // we'll render LetterContent with various states to verify correct card
 

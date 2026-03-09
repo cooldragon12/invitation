@@ -1,6 +1,7 @@
 import React, { memo, Suspense } from 'react'
 
 import Spinner from '@/components/Spinner'
+
 import Letter from './Letter'
 
 const Index: React.FC = memo(() => {

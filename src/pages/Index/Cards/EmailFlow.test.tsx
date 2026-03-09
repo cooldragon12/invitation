@@ -1,5 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
-import EmailFlow from './EmailFlow'
+
+import EmailFlow from '@/pages/Index/Cards/EmailFlow';
+
 import { describe, it, expect, vi } from 'vitest'
 
 // mock the service functions so they resolve immediately

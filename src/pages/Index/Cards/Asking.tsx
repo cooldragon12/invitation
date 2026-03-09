@@ -1,12 +1,13 @@
 import { memo, useRef, useState } from 'react';
-import { AnswerType } from '@/@types/card.types';
+
+import type { AnswerType } from '@/@types/card.types';
 
 type AskingProps = {
   onAnswer: (response: AnswerType) => void;
 };
 
 const Asking = memo(({ onAnswer }: AskingProps) => {
-    const [newPos, setNewPos] = useState({ x: 500, y: 500 });
+    // const [newPos, setNewPos] = useState({ x: 500, y: 500 });
     const [newScale, setScale] = useState(1);
     const ref_cont = useRef<HTMLDivElement>(null);
     // const clickNoHandler = (e: React.MouseEvent) => {
@@ -18,7 +19,7 @@ const Asking = memo(({ onAnswer }: AskingProps) => {
     //     const y = Math.random() * (616 - ref_cont.current?.clientWidth!) + ref_cont.current?.clientWidth! / 2 +mouseY/10;
     //     setNewPos({ x, y });
     // };
-    const clickNoHandler = (e: React.MouseEvent) => {
+    const clickNoHandler = () => {
         setScale((prev) => prev + 0.1);
     };
     return (
