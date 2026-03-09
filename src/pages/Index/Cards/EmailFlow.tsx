@@ -1,6 +1,6 @@
 import { memo, useState, useEffect } from 'react';
 import { generateEmailContent, sendEmail } from '@/services/emailService';
-import { AnswerType } from '../../../@types/card.types';
+import { AnswerType } from '@/@types/card.types';
 
 interface Activity {
   id: number;

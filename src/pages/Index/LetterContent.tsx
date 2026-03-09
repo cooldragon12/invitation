@@ -6,8 +6,8 @@ import Preference from '@/pages/Index/Cards/Preference';
 import Regret from '@/pages/Index/Cards/Regret';
 import Grateful from '@/pages/Index/Cards/Grateful';
 import EmailFlow from '@/pages/Index/Cards/EmailFlow';
-import { InvitationState, InvitationAction } from '../../utils/reducer/invitationReducer';
-import { AnswerType } from '../../@types/card.types';
+import { InvitationState, InvitationAction } from '@/utils/reducer/invitationReducer';
+import { AnswerType } from '@/@types/card.types';
 
 interface Activity {
   id: number;

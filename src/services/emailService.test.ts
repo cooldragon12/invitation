@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, Mock } from 'vitest'
 
 // mock generative ai and emailjs
 vi.mock('@google/generative-ai', () => {
@@ -70,7 +70,7 @@ describe('emailService', () => {
         VITE_EMAILJS_TEMPLATE_ID: 't',
         VITE_EMAILJS_USER_ID: 'u',
       })
-      ;(emailjs.send as vi.Mock).mockResolvedValue({ status: 200 })
+      ;(emailjs.send as Mock).mockResolvedValue({ status: 200 })
       const { sendEmail } = await import('./emailService')
       const res = await sendEmail({ to: 'a', from: 'b', subject: 'c', body: 'd', recipientName: 'x', answer: 'yes' })
       expect(emailjs.send).toHaveBeenCalled()
@@ -83,7 +83,7 @@ describe('emailService', () => {
         VITE_EMAILJS_TEMPLATE_ID: 't',
         VITE_EMAILJS_USER_ID: 'u',
       })
-      ;(emailjs.send as vi.Mock).mockRejectedValue(new Error('fail'))
+      ;(emailjs.send as Mock).mockRejectedValue(new Error('fail'))
       const { sendEmail } = await import('./emailService')
       const res = await sendEmail({ to: 'a', from: 'b', subject: 'c', body: 'd', recipientName: 'x', answer: 'maybe' })
       expect(res.success).toBe(false)

@@ -11,7 +11,7 @@ vi.mock('@/pages/Index/Cards/EmailFlow', () => {
 
 import { render, screen } from '@testing-library/react'
 import LetterContent from './LetterContent'
-import { invitationReducer, initialState } from '../../utils/reducer/invitationReducer'
+import { initialState } from '@/utils/reducer/invitationReducer'
 
 // we'll render LetterContent with various states to verify correct card
 

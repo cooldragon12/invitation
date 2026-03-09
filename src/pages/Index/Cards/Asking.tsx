@@ -1,6 +1,5 @@
-import { memo, useEffect, useRef, useState } from 'react';
-import ButtonBeating from '@/components/Button';
-import { AnswerType } from '../../../@types/card.types';
+import { memo, useRef, useState } from 'react';
+import { AnswerType } from '@/@types/card.types';
 
 type AskingProps = {
   onAnswer: (response: AnswerType) => void;

@@ -1,4 +1,4 @@
-import { CardSlides, AnswerType } from '../../@types/card.types';
+import { CardSlides, AnswerType } from '@/@types/card.types';
 
 export interface InvitationState {
   card: CardSlides;

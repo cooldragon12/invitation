@@ -1,7 +1,7 @@
 import React, { FC, PropsWithChildren, useReducer, useTransition } from 'react'
 import LetterContent from './LetterContent';
-import { invitationReducer, initialState } from '../../utils/reducer/invitationReducer';
-import { AnswerType } from '../../@types/card.types';
+import { invitationReducer, initialState } from '@/utils/reducer/invitationReducer';
+import { AnswerType } from '@/@types/card.types';
 
 const Letter:FC<PropsWithChildren> = ({children,...props})=>{
     const [isPending, startTransition] = useTransition();
