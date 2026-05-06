@@ -37,7 +37,7 @@
     "aws-cdk": "^2.1120.0",
     "clsx": "^2.1.1",
     "googleapis": "^171.4.0",
-    "react": "^19.2.5",
+    "react": "^19.2.6",
     "react-dom": "^19.2.5",
     "react-router": "^7.15.0"
   },
