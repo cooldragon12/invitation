@@ -106,8 +106,8 @@ importers:
         specifier: ^17.0.2
         version: 17.0.2
       msw:
-        specifier: ^2.14.4
-        version: 2.14.4(@types/node@25.6.1)(typescript@5.9.3)
+        specifier: ^2.14.5
+        version: 2.14.5(@types/node@25.6.1)(typescript@5.9.3)
       postcss:
         specifier: ^8.5.14
         version: 8.5.14
@@ -140,7 +140,7 @@ importers:
         version: 5.2.0(rollup@4.59.0)(typescript@5.9.3)(vite@8.0.11(@types/node@25.6.1)(esbuild@0.27.3)(jiti@2.6.1)(yaml@2.8.4))
       vitest:
         specifier: ^4.0.15
-        version: 4.0.15(@types/node@25.6.1)(@vitest/ui@4.0.15)(jiti@2.6.1)(jsdom@29.1.1)(lightningcss@1.32.0)(msw@2.14.4(@types/node@25.6.1)(typescript@5.9.3))(yaml@2.8.4)
+        version: 4.0.15(@types/node@25.6.1)(@vitest/ui@4.0.15)(jiti@2.6.1)(jsdom@29.1.1)(lightningcss@1.32.0)(msw@2.14.5(@types/node@25.6.1)(typescript@5.9.3))(yaml@2.8.4)
 
 packages:
 
@@ -2585,8 +2585,8 @@ packages:
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
 
-  msw@2.14.4:
-    resolution: {integrity: sha512-HVPZJ9Rx4nDCWhjNQ57lKQGSE+0zDHw0xWE2IN2rLOUTLkagEBWNlvWuKYNwG2pQWq96TMd8NiSK/6vO1udnWQ==}
+  msw@2.14.5:
+    resolution: {integrity: sha512-X6G05oX4x0e+CNI55KMdhMmwHCBKf2iwazGr+iwsdoJ94JA1ED7wSXb6V+lLPdqFkmIlPiGYvayqnaNcOzobDA==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
@@ -4605,13 +4605,13 @@ snapshots:
       chai: 6.2.1
       tinyrainbow: 3.0.3
 
-  '@vitest/mocker@4.0.15(msw@2.14.4(@types/node@25.6.1)(typescript@5.9.3))(vite@7.3.3(@types/node@25.6.1)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.4))':
+  '@vitest/mocker@4.0.15(msw@2.14.5(@types/node@25.6.1)(typescript@5.9.3))(vite@7.3.3(@types/node@25.6.1)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.4))':
     dependencies:
       '@vitest/spy': 4.0.15
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      msw: 2.14.4(@types/node@25.6.1)(typescript@5.9.3)
+      msw: 2.14.5(@types/node@25.6.1)(typescript@5.9.3)
       vite: 7.3.3(@types/node@25.6.1)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.4)
 
   '@vitest/pretty-format@4.0.15':
@@ -4640,7 +4640,7 @@ snapshots:
       sirv: 3.0.2
       tinyglobby: 0.2.15
       tinyrainbow: 3.0.3
-      vitest: 4.0.15(@types/node@25.6.1)(@vitest/ui@4.0.15)(jiti@2.6.1)(jsdom@29.1.1)(lightningcss@1.32.0)(msw@2.14.4(@types/node@25.6.1)(typescript@5.9.3))(yaml@2.8.4)
+      vitest: 4.0.15(@types/node@25.6.1)(@vitest/ui@4.0.15)(jiti@2.6.1)(jsdom@29.1.1)(lightningcss@1.32.0)(msw@2.14.5(@types/node@25.6.1)(typescript@5.9.3))(yaml@2.8.4)
 
   '@vitest/utils@4.0.15':
     dependencies:
@@ -6072,7 +6072,7 @@ snapshots:
 
   ms@2.1.3: {}
 
-  msw@2.14.4(@types/node@25.6.1)(typescript@5.9.3):
+  msw@2.14.5(@types/node@25.6.1)(typescript@5.9.3):
     dependencies:
       '@inquirer/confirm': 6.0.12(@types/node@25.6.1)
       '@mswjs/interceptors': 0.41.8
@@ -6901,10 +6901,10 @@ snapshots:
       jiti: 2.6.1
       yaml: 2.8.4
 
-  vitest@4.0.15(@types/node@25.6.1)(@vitest/ui@4.0.15)(jiti@2.6.1)(jsdom@29.1.1)(lightningcss@1.32.0)(msw@2.14.4(@types/node@25.6.1)(typescript@5.9.3))(yaml@2.8.4):
+  vitest@4.0.15(@types/node@25.6.1)(@vitest/ui@4.0.15)(jiti@2.6.1)(jsdom@29.1.1)(lightningcss@1.32.0)(msw@2.14.5(@types/node@25.6.1)(typescript@5.9.3))(yaml@2.8.4):
     dependencies:
       '@vitest/expect': 4.0.15
-      '@vitest/mocker': 4.0.15(msw@2.14.4(@types/node@25.6.1)(typescript@5.9.3))(vite@7.3.3(@types/node@25.6.1)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.4))
+      '@vitest/mocker': 4.0.15(msw@2.14.5(@types/node@25.6.1)(typescript@5.9.3))(vite@7.3.3(@types/node@25.6.1)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.4))
       '@vitest/pretty-format': 4.0.15
       '@vitest/runner': 4.0.15
       '@vitest/snapshot': 4.0.15
