@@ -39,7 +39,7 @@
     "googleapis": "^172.0.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router": "^7.15.1"
+    "react-router": "^7.16.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
