@@ -15,8 +15,8 @@ importers:
         specifier: ^0.24.1
         version: 0.24.1
       aws-cdk:
-        specifier: ^2.1133.0
-        version: 2.1133.0
+        specifier: ^2.1134.0
+        version: 2.1134.0
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -1464,8 +1464,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk@2.1133.0:
-    resolution: {integrity: sha512-DGlCBwqxSHTe1u/IoT5WV+Bbd2K3UhwFHsdMqb2nQa1fkJmaQgoNFu0It+p3HxyMWeW+gKsVzT5KcjQPQ6Kzuw==}
+  aws-cdk@2.1134.0:
+    resolution: {integrity: sha512-Fy/g+gdpMpkhAAoCNlZtX0s4mD7q58bHlDV6QfbnTeifmQ5cEge26c5rB+U4qKB/bDudxNuJjQk/mSSk0ysnug==}
     engines: {node: '>= 18.0.0'}
     hasBin: true
 
@@ -4744,7 +4744,7 @@ snapshots:
       possible-typed-array-names: 1.1.0
     optional: true
 
-  aws-cdk@2.1133.0: {}
+  aws-cdk@2.1134.0: {}
 
   balanced-match@1.0.2: {}
 
