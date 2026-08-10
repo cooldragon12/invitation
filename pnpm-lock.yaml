@@ -21,8 +21,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       googleapis:
-        specifier: ^174.0.0
-        version: 174.0.0
+        specifier: ^174.0.1
+        version: 174.0.1
       react:
         specifier: ^19.2.8
         version: 19.2.8
@@ -2132,8 +2132,8 @@ packages:
     resolution: {integrity: sha512-7g1yzQKx0mmNTjiK0H9dJ8eqKqDBveES9vLHeg5neb3BMQy/d1oQefIMhIpOVT8a+f+LOcixMEdRbFIW/cQUJw==}
     engines: {node: '>=18'}
 
-  googleapis@174.0.0:
-    resolution: {integrity: sha512-RsoF0NOM+hIB+Ja60ymQZjTFQAkOUcQMakD3hd0FK6WOCVIxGXmnnK0ndHaEJUmzp+aQuaZleRTMX1DnowUfTQ==}
+  googleapis@174.0.1:
+    resolution: {integrity: sha512-51B9r4WnyAyUXvsDhDswpSVZbqx3afSBEzrzshxBivysBKsB6kJ+X5CVOybRV/R3HIURiR01uHXLGkEm7On3dA==}
     engines: {node: '>=18'}
 
   gopd@1.2.0:
@@ -5641,7 +5641,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  googleapis@174.0.0:
+  googleapis@174.0.1:
     dependencies:
       google-auth-library: 10.5.0
       googleapis-common: 8.0.3
