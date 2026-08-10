@@ -36,7 +36,7 @@
     "@google/generative-ai": "^0.24.1",
     "aws-cdk": "^2.1135.0",
     "clsx": "^2.1.1",
-    "googleapis": "^174.0.0",
+    "googleapis": "^174.0.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router": "^8.3.0"
