@@ -32,7 +32,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
+    "@emailjs/browser": "^5.0.2",
     "@google/generative-ai": "^0.24.1",
     "aws-cdk": "^2.1144.0",
     "clsx": "^2.1.1",
