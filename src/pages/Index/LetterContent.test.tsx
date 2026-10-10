@@ -1,4 +1,7 @@
+import { render, screen } from '@testing-library/react'
 import { describe, it, expect, vi } from 'vitest'
+import { initialState } from '@/utils/reducer/invitationReducer'
+import LetterContent from './LetterContent'
 
 // stub out EmailFlow so it doesn't trigger network effects
 vi.mock('@/pages/Index/Cards/EmailFlow', () => {
@@ -13,13 +16,6 @@ vi.mock('@/pages/Index/Cards/EmailFlow', () => {
     ),
   }
 })
-
-import { render, screen } from '@testing-library/react'
-
-import { initialState } from '@/utils/reducer/invitationReducer'
-
-import LetterContent from './LetterContent'
-
 // we'll render LetterContent with various states to verify correct card
 
 describe('LetterContent component', () => {

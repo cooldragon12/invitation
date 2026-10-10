@@ -1,5 +1,5 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import emailjs from '@emailjs/browser';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 interface EmailPayload {
   to: string;

@@ -1,8 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react'
-
-import EmailFlow from '@/pages/Index/Cards/EmailFlow';
-
 import { describe, it, expect, vi } from 'vitest'
+import EmailFlow from '@/pages/Index/Cards/EmailFlow';
+import { generateEmailContent, sendEmail } from '@/services/emailService'
 
 // mock the service functions so they resolve immediately
 vi.mock('@/services/emailService', () => {
@@ -11,8 +10,6 @@ vi.mock('@/services/emailService', () => {
     sendEmail: vi.fn().mockResolvedValue({ success: true }),
   }
 })
-
-import { generateEmailContent, sendEmail } from '@/services/emailService'
 
 describe('EmailFlow card', () => {
   beforeEach(() => {

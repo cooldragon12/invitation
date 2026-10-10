@@ -1,3 +1,4 @@
+import emailjs from '@emailjs/browser'
 import type { Mock } from 'vitest';
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 
@@ -27,8 +28,6 @@ vi.mock('@emailjs/browser', () => {
     },
   }
 })
-
-import emailjs from '@emailjs/browser'
 
 // helper to stub import.meta.env (configurable to allow multiple calls)
 function configureEnv(env: Record<string, string | undefined>) {

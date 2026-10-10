@@ -64,6 +64,7 @@ const EmailFlow = memo(({ answer, selectedActivities, activities }: EmailFlowPro
     const checkIfAlReadySent = async () => {
       // Check if email was already sent in this session (e.g., using localStorage)
       const alreadySent = localStorage.getItem('emailSent');
+      setSent(!!alreadySent);
       if (!alreadySent) {
         await autoSendEmail();
         localStorage.setItem('emailSent', 'true');
@@ -115,22 +116,10 @@ const EmailFlow = memo(({ answer, selectedActivities, activities }: EmailFlowPro
       <div className="w-full h-full flex flex-col justify-center items-center px-6 py-8 animate-fadeIn">
         <div className="bg-green-50 rounded-2xl p-8 text-center w-full max-w-md">
           <div className="text-6xl mb-4 animate-bounce">✅</div>
-          <h3 className="text-2xl font-bold text-gray-800 mb-3">Email sent! 💌</h3>
+          {/* <h3 className="text-2xl font-bold text-gray-800 mb-3">Email sent! 💌</h3> */}
           <p className="text-gray-600 mb-6">
-            Your message has been sent to <span className="font-semibold">{email}</span>
+            Thank you for responding! 🙌
           </p>
-          <p className="text-sm text-gray-500">
-            She'll receive your personalized message with all the details!
-          </p>
-          <button
-            onClick={() => {
-              setSent(false);
-              setEmailContent(null);
-            }}
-            className="mt-6 text-pink-500 hover:text-pink-600 font-semibold transition-colors"
-          >
-            Send to another email →
-          </button>
         </div>
       </div>
     );

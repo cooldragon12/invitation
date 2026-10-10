@@ -1,4 +1,4 @@
-import { memo, useEffect} from 'react';
+import { memo, useCallback, useEffect} from 'react';
 
 type GratefulProps = {
   onEmailFlow: () => void;
@@ -6,16 +6,16 @@ type GratefulProps = {
 
 const Grateful = memo(({ onEmailFlow }: GratefulProps) => {
 
-  const executes = ()=>{
+  const executes = useCallback(()=>{
     // Delay transition to email flow for better UX
     setTimeout(() => {
       onEmailFlow();
     }, 3000);
-  }
+  }, [onEmailFlow]);
 
   useEffect(() => {
     executes();
-  }, [])
+  }, [executes]);
 
   
   return (
