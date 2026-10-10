@@ -2,15 +2,16 @@ import clsx from 'clsx';
 import React from 'react'
 import type { PropsWithChildren, HTMLAttributes } from 'react'
 
-
-
-const ButtonBeating: React.FC<PropsWithChildren<HTMLAttributes<HTMLButtonElement>>> = ({ children, ...rest}) => {
+// Heart-shaped wax seal used to open the envelope
+const ButtonBeating: React.FC<PropsWithChildren<HTMLAttributes<HTMLButtonElement>>> = ({ children, className, ...rest}) => {
   return (
     <button
-
       {...rest}
       type='button'
-      className={clsx(`text-center items-center w-30 h-30 z-20 bg-linear-to-r from-pink-400 to-red-400 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 `,rest.className)}
+      className={clsx(
+        'group relative flex size-24 cursor-pointer flex-col items-center justify-center rounded-full bg-linear-to-br from-rose-400 to-rose-600 font-bold tracking-widest text-white shadow-xl shadow-rose-400/50 ring-4 ring-rose-300/60 transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-pink-200 sm:size-28',
+        className,
+      )}
     >
       {children}
     </button>

@@ -1,25 +1,26 @@
 import { memo } from 'react';
 
+import PillButton from '@/components/Button/PillButton';
+
 type GreetingsProps = {
   onNext?: () => void;
 };
 
 const Greetings = memo(({ onNext }: GreetingsProps) => {
     return (
-        <div className='animate-fadeIn w-full h-full flex flex-col justify-center items-center px-6'>
-            <h1 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800">
-              Hello KY <span className="animate-waving">👋</span>
+        <div className='flex w-full flex-col items-center justify-center px-6 pb-12 pt-4 text-center sm:px-12'>
+            <p className='mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-pink-400'>
+              A little letter
+            </p>
+            <h1 className="mb-6 font-script text-5xl font-bold leading-tight text-rose-600 sm:text-6xl">
+              Hello Ysa My Love <span className="animate-waving">👋</span>
             </h1>
-            <p className="text-gray-600 text-center mb-8 max-w-sm">
+            <p className="mb-10 max-w-sm text-lg text-rose-900/70">
               I have something special to ask you...
             </p>
-            <button
-              onClick={onNext}
-              type='button'
-              className="bg-linear-to-r from-pink-400 to-rose-400 text-white px-8 py-3 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200"
-            >
+            <PillButton onClick={onNext}>
               Continue 💕
-            </button>
+            </PillButton>
         </div>
     )
 });

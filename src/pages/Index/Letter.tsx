@@ -1,5 +1,6 @@
+import clsx from 'clsx';
 import type { FC, PropsWithChildren} from 'react';
-import { useReducer, useTransition } from 'react'
+import { useCallback, useReducer, useTransition } from 'react'
 
 import type { AnswerType } from '@/@types/card.types';
 import { invitationReducer, initialState } from '@/utils/reducer/invitationReducer';
@@ -9,6 +10,7 @@ import LetterContent from './LetterContent';
 const Letter:FC<PropsWithChildren> = ()=>{
     const [isPending, startTransition] = useTransition();
     const [state, dispatch] = useReducer(invitationReducer, initialState);
+    const isEnvelope = state.card === 'start';
 
     const openCallback = ()=>{
         startTransition(()=>{
@@ -31,17 +33,30 @@ const Letter:FC<PropsWithChildren> = ()=>{
         dispatch({ type: 'SELECT_ACTIVITIES', payload: activities });
     };
 
-    const handleEmailFlow = () => {
+    // Stable so Grateful's auto-advance timer isn't reset on re-render
+    const handleEmailFlow = useCallback(() => {
         dispatch({ type: 'GO_TO_EMAIL_FLOW' });
-    };
+    }, []);
 
     const handleReconsider = () => {
         dispatch({ type: 'RECONSIDER' });
     };
 
+    const handleGoBack = () => {
+        dispatch({ type: 'GO_BACK' });
+    };
+
     return (
-        <div className={` ${state.open || isPending? 'w-220 h-170':'w-200 h-140'} transition-all overflow-hidden delay-300 bg-white rounded-3xl flex justify-center relative`}>
-            <LetterContent  
+        <div
+            aria-busy={isPending}
+            className={clsx(
+                'relative w-full transition-[max-width] duration-500',
+                isEnvelope
+                    ? 'aspect-[4/3] max-w-xl'
+                    : 'max-w-3xl rounded-3xl bg-white/95 shadow-2xl shadow-rose-300/40 ring-1 ring-pink-100 backdrop-blur',
+            )}
+        >
+            <LetterContent
                 state={state}
                 dispatch={dispatch}
                 openCallback={openCallback}
@@ -49,6 +64,7 @@ const Letter:FC<PropsWithChildren> = ()=>{
                 onActivitySelect={handleActivitySelect}
                 onEmailFlow={handleEmailFlow}
                 onReconsider={handleReconsider}
+                onGoBack={handleGoBack}
             />
         </div>
     )

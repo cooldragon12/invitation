@@ -72,6 +72,7 @@ describe('invitationReducer', () => {
         open: true,
         answer: 'yes',
         selectedActivities: [1, 2],
+        cardHistory: ['asking'],
       }
       const next = invitationReducer(modified, { type: 'RECONSIDER' })
       expect(next.answer).toBeNull()
@@ -85,6 +86,7 @@ describe('invitationReducer', () => {
         open: true,
         answer: 'maybe',
         selectedActivities: [3],
+        cardHistory: ['preference'],
       }
       const next = invitationReducer(modified, { type: 'RESET' })
       expect(next).toEqual(initialState)

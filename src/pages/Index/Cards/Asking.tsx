@@ -1,69 +1,78 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useState } from 'react';
 
 import type { AnswerType } from '@/@types/card.types';
+import PillButton from '@/components/Button/PillButton';
 
 type AskingProps = {
   onAnswer: (response: AnswerType) => void;
 };
 
-const Asking = memo(({ onAnswer }: AskingProps) => {
-    // const [newPos, setNewPos] = useState({ x: 500, y: 500 });
-    const [newScale, setScale] = useState(1);
-    const ref_cont = useRef<HTMLDivElement>(null);
-    // const clickNoHandler = (e: React.MouseEvent) => {
-    //     const button = e.currentTarget as HTMLElement;
+// Each "No" makes the "Yes" a little bigger and the plea a little stronger
+const noLabels = [
+  'No 😔',
+  'Are you sure? 🥺',
+  'Really sure? 😢',
+  'Think again? 💭',
+  "You're breaking my heart 💔",
+];
+const NEED_TIME_AFTER = 3;
+const MAX_YES_SCALE = 1.6;
 
-    //     const mouseX = e.clientX;
-    //     const mouseY = e.clientY;
-    //     const x = Math.random() * (832- ref_cont.current?.clientWidth!)  + ref_cont.current?.clientWidth! / 2 + mouseX/10;
-    //     const y = Math.random() * (616 - ref_cont.current?.clientWidth!) + ref_cont.current?.clientWidth! / 2 +mouseY/10;
-    //     setNewPos({ x, y });
-    // };
-    const clickNoHandler = () => {
-        setScale((prev) => prev + 0.1);
-    };
+const Asking = memo(({ onAnswer }: AskingProps) => {
+    const [noCount, setNoCount] = useState(0);
+    const yesScale = Math.min(1 + noCount * 0.15, MAX_YES_SCALE);
+
     return (
-    <div ref={ref_cont} className="w-full h-full flex flex-col justify-center items-center px-6 py-8 animate-fadeIn">
-      <div className="text-6xl mb-6 animate-beating">❤️</div>
-      
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center">
-        To Someone Special... 💌
+    <div className="flex w-full flex-col items-center justify-center px-6 pb-10 pt-2 text-center sm:px-12">
+      <div className="mb-4 text-5xl animate-beating" aria-hidden="true">💗</div>
+
+      <h2 className="mb-5 font-script text-4xl font-bold text-rose-600 sm:text-5xl">
+        To Someone Special...
       </h2>
 
-      <div className="space-y-4 text-gray-700 leading-relaxed mb-8 max-w-xl text-center">
-        <p className="text-base md:text-lg">
+      <div className="mb-8 max-w-xl space-y-4 leading-relaxed text-rose-900/75">
+        <p className="text-base sm:text-lg">
           You always stun me, and you always complete my day — you're someone I
           have been looking for from the moment I wake up until the night before
           sleeping. You are my dream that I don't want to end.
         </p>
-        <p className="text-lg font-semibold text-center text-rose-500 mt-8">
+        <p className="font-semibold text-rose-500">
           So here's my question...
         </p>
       </div>
 
-      <div className="bg-linear-to-r from-pink-100 to-rose-100 rounded-2xl p-6 md:p-8 text-center w-full max-w-md">
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+      <div className="w-full max-w-md rounded-3xl bg-linear-to-br from-pink-50 to-rose-100 p-6 ring-1 ring-pink-100 sm:p-8">
+        <h3 className="mb-6 text-2xl font-bold text-rose-900 sm:text-3xl">
           Will you go out with me? 💕
         </h3>
 
-        <div className="flex gap-4 justify-center flex-wrap animate-fadeIn animate-delay-500">
-          <button
+        <div className="flex flex-wrap items-center justify-center gap-4">
+          <PillButton
             onClick={() => onAnswer('yes')}
-            style={{ scale: `${newScale}` }}
-            className="bg-linear-to-r hover:cursor-pointer from-rose-400 to-pink-400 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200"
+            style={{ scale: `${yesScale}` }}
+            className="relative z-10 px-9"
           >
             Yes! 😊
-          </button>
-          <button
-            onClick={clickNoHandler}
-            onMouseEnter={clickNoHandler}
+          </PillButton>
+          <PillButton
+            variant="muted"
+            onClick={() => setNoCount((count) => count + 1)}
             name='no-button'
-            className={`shake-on-hover hover:cursor-pointer bg-linear-to-r from-gray-400 to-gray-400 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transform hover:scale-110 transition-all duration-200`}
+            className="shake-on-hover"
           >
-            No 😔
-          </button>
+            {noLabels[Math.min(noCount, noLabels.length - 1)]}
+          </PillButton>
         </div>
 
+        {noCount >= NEED_TIME_AFTER && (
+          <button
+            type="button"
+            onClick={() => onAnswer('maybe')}
+            className="mt-6 cursor-pointer text-sm font-semibold text-rose-400 underline decoration-dotted underline-offset-4 animate-fadeIn hover:text-rose-600"
+          >
+            I need a little time to think 💭
+          </button>
+        )}
       </div>
     </div>
   );

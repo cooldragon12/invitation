@@ -1,12 +1,12 @@
-import { memo, useState, useEffect } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
-import type { AnswerType } from '@/@types/card.types';
+import type { Activity, AnswerType } from '@/@types/card.types';
+import PillButton from '@/components/Button/PillButton';
 import { generateEmailContent, sendEmail } from '@/services/emailService';
 
-interface Activity {
-  id: number;
-  name: string;
-}
+const SENT_KEY = 'emailSent';
+
+type Status = 'sending' | 'sent' | 'error';
 
 type EmailFlowProps = {
   answer: AnswerType;
@@ -15,171 +15,130 @@ type EmailFlowProps = {
 };
 
 const EmailFlow = memo(({ answer, selectedActivities, activities }: EmailFlowProps) => {
-  const [email, setEmail] = useState('johndelencabo@gmail.com');
-  const [loading, setLoading] = useState(false);
-  const [emailContent, setEmailContent] = useState<{
-    subject: string;
-    body: string;
-  } | null>(null);
-  const [sent, setSent] = useState(false);
+  const [email, setEmail] = useState('kyleenobmerga67@gmail.com'); // default email for testing
+  // Only send once per browser, even if the card is shown again
+  const [status, setStatus] = useState<Status>(() =>
+    localStorage.getItem(SENT_KEY) ? 'sent' : 'sending'
+  );
   const [error, setError] = useState<string | null>(null);
+  const autoSent = useRef(false);
 
-  const selectedActivityNames = activities
-    .filter((a) => selectedActivities.includes(a.id))
-    .map((a) => a.name);
+  const chosen = activities.filter((a) => selectedActivities.includes(a.id));
 
-  // Auto-send email when component mounts
-  useEffect(() => {
-    const autoSendEmail = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        // Generate email content using AI
-        const content = await generateEmailContent(answer, selectedActivityNames);
-        setEmailContent(content);
-
-        // Send the email
-        const result = await sendEmail({
-          to: email,
-          from: 'johndelencabo@gmail.com',
-          subject: content.subject,
-          body: content.body,
-          recipientName: 'Kyleen Ysabelle',
-          activities: selectedActivityNames,
-          answer: answer,
-        });
-
-        if (result.success) {
-          setSent(true);
-        } else {
-          setError(result.error || 'Failed to send email');
-        }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-    const checkIfAlReadySent = async () => {
-      // Check if email was already sent in this session (e.g., using localStorage)
-      const alreadySent = localStorage.getItem('emailSent');
-      setSent(!!alreadySent);
-      if (!alreadySent) {
-        await autoSendEmail();
-        localStorage.setItem('emailSent', 'true');
-      }
-    };
-    checkIfAlReadySent();
-  }, []);
-
-  const handleGenerateAndSend = async () => {
-    if (!email) {
-      setError('Please enter an email address');
-      return;
-    }
-
-    setLoading(true);
+  const send = async (to: string) => {
+    setStatus('sending');
     setError(null);
-    setSent(false);
 
     try {
       // Generate email content using AI
-      const content = await generateEmailContent(answer, selectedActivityNames);
-      setEmailContent(content);
+      const names = chosen.map((a) => a.name);
+      const content = await generateEmailContent(answer, names);
 
-      // Send the email
       const result = await sendEmail({
-        to: email,
+        to,
         from: 'johndelencabo@gmail.com',
         subject: content.subject,
         body: content.body,
         recipientName: 'Kyleen Ysabelle',
-        activities: selectedActivityNames,
+        activities: names,
         answer: answer,
       });
 
       if (result.success) {
-        setSent(true);
+        localStorage.setItem(SENT_KEY, 'true');
+        setStatus('sent');
       } else {
         setError(result.error || 'Failed to send email');
+        setStatus('error');
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
-    } finally {
-      setLoading(false);
+      setStatus('error');
     }
   };
 
-  if (sent) {
+  // Auto-send email when component mounts
+  useEffect(() => {
+    if (status === 'sending' && !autoSent.current) {
+      autoSent.current = true;
+      void send(email);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (status === 'sending') {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center px-6 py-8 animate-fadeIn">
-        <div className="bg-green-50 rounded-2xl p-8 text-center w-full max-w-md">
-          <div className="text-6xl mb-4 animate-bounce">✅</div>
-          {/* <h3 className="text-2xl font-bold text-gray-800 mb-3">Email sent! 💌</h3> */}
-          <p className="text-gray-600 mb-6">
-            Thank you for responding! 🙌
-          </p>
-        </div>
+      <div className="flex w-full flex-col items-center justify-center px-6 pb-12 pt-2 text-center" role="status">
+        <div className="mb-5 text-6xl animate-beating" aria-hidden="true">💌</div>
+        <h3 className="mb-2 text-2xl font-bold text-rose-900">Preparing your message...</h3>
+        <p className="text-rose-900/70">Writing a little note with everything you chose ✨</p>
       </div>
     );
   }
 
-  if (loading) {
+  if (status === 'sent') {
     return (
-      <div className="w-full h-full flex flex-col justify-center items-center px-6 py-8">
-        <div className="text-center">
-          <div className="inline-block">
-            <div className="animate-spin text-5xl mb-4">✨</div>
-            <h3 className="text-xl font-bold text-gray-800 mb-2">Preparing your message...</h3>
-            <p className="text-gray-600">Generating a personalized email with AI</p>
-          </div>
-        </div>
+      <div className="flex w-full flex-col items-center justify-center px-6 pb-12 pt-2 text-center">
+        <div className="mb-5 text-7xl" aria-hidden="true">💞</div>
+        <h3 className="mb-3 font-script text-5xl font-bold text-rose-600">Email sent! 💌</h3>
+        <p className="mb-6 max-w-md text-lg text-rose-900/75">
+          {answer === 'yes'
+            ? "Thank you for saying yes! I'll reach out soon with all the details 🥰"
+            : 'Thank you for being honest with me. The invitation is always open 💕'}
+        </p>
+        {answer === 'yes' && chosen.length > 0 && (
+          <ul className="flex max-w-lg flex-wrap justify-center gap-2" aria-label="Our plans">
+            {chosen.map((plan) => (
+              <li
+                key={plan.id}
+                className="rounded-full bg-pink-50 px-3 py-1 text-sm font-semibold text-rose-600 ring-1 ring-pink-200"
+              >
+                {plan.icon} {plan.name}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center px-4 py-6 animate-fadeIn">
-      <div className="bg-gray-50 rounded-2xl p-6 space-y-4 w-full max-w-md">
-        <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">
-          Send to a Different Email? 💌
-        </h3>
+    <div className="flex w-full flex-col items-center justify-center px-4 pb-12 pt-2 text-center">
+      <div className="mb-4 text-6xl" aria-hidden="true">💔</div>
+      <h3 className="mb-2 text-2xl font-bold text-rose-900">Oops, the letter got lost</h3>
+      <p className="mb-6 max-w-sm text-rose-900/70">
+        Your answer didn't go through. Let's try sending it again.
+      </p>
 
-        {emailContent && (
-          <div className="bg-white rounded-lg p-4 mb-4 border border-pink-200 max-h-40 overflow-y-auto">
-            <p className="text-xs font-bold text-gray-600 mb-2">Generated Message:</p>
-            <p className="text-xs text-gray-700 whitespace-pre-wrap">{emailContent.body}</p>
-          </div>
-        )}
-
-        <input
-          type="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg border-2 border-pink-300 focus:border-pink-400 focus:outline-none text-gray-700"
-          disabled={loading}
-        />
+      <form
+        className="w-full max-w-sm space-y-4"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (email) void send(email);
+        }}
+      >
+        <label className="block text-left text-sm font-semibold text-rose-900/70">
+          Send to
+          <input
+            type="email"
+            required
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="mt-1 w-full rounded-2xl border-2 border-pink-200 bg-white px-4 py-3 text-rose-900 focus:border-rose-400 focus:outline-none"
+          />
+        </label>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-sm text-red-700">
+          <p className="rounded-2xl bg-rose-50 p-3 text-sm text-rose-700 ring-1 ring-rose-200" role="alert">
             {error}
-          </div>
+          </p>
         )}
 
-        <button
-          onClick={handleGenerateAndSend}
-          disabled={!email || loading}
-          className="w-full bg-linear-to-r from-pink-400 to-rose-400 text-white px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {loading ? 'Sending...' : 'Resend Email 📧'}
-        </button>
-
-        <p className="text-sm text-gray-500 text-center">
-          Your personalized message has already been sent! Change email to resend.
-        </p>
-      </div>
+        <PillButton type="submit" disabled={!email} className="w-full">
+          Try again 💌
+        </PillButton>
+      </form>
     </div>
   );
 });

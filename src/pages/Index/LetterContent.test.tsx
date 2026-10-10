@@ -74,3 +74,39 @@ describe('LetterContent component', () => {
     expect(screen.getByText(/Mocked EmailFlow/i)).toBeInTheDocument()
   })
 })
+
+describe('LetterContent navigation', () => {
+  const noop = vi.fn()
+  const renderCard = (state: typeof initialState) =>
+    render(
+      <LetterContent
+        state={state}
+        dispatch={noop}
+        openCallback={noop}
+        onAnswer={noop}
+        onActivitySelect={noop}
+        onEmailFlow={noop}
+        onReconsider={noop}
+        onGoBack={noop}
+      />,
+    )
+
+  it('offers back on the question card', () => {
+    renderCard({ ...initialState, card: 'asking', cardHistory: ['start', 'greetings'] })
+    expect(screen.getByRole('button', { name: /Back/i })).toBeInTheDocument()
+  })
+
+  it('hides back on greetings and the final cards', () => {
+    for (const card of ['greetings', 'grateful', 'emailFlow']) {
+      const { unmount } = renderCard({ ...initialState, card, answer: 'yes', cardHistory: ['start'] })
+      expect(screen.queryByRole('button', { name: /Back/i })).not.toBeInTheDocument()
+      unmount()
+    }
+  })
+
+  it('shows the chosen plans on the grateful card', () => {
+    renderCard({ ...initialState, card: 'grateful', selectedActivities: [1, 5] })
+    expect(screen.getByText(/Romantic Dinner/)).toBeInTheDocument()
+    expect(screen.getByText(/Coffee Date/)).toBeInTheDocument()
+  })
+})
