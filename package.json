@@ -57,7 +57,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react-swc": "^4.3.3",
     "@vitest/ui": "^4.0.15",
-    "all-contributors-cli": "^6.26.1",
+    "all-contributors-cli": "^7.0.0",
     "concurrently": "^10.0.6",
     "cross-fetch": "^4.1.0",
     "eslint": "^9.39.1",
